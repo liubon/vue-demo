@@ -24,15 +24,20 @@ const user = {
   actions: {
     async UserLogin({ commit }, data) {
       const res = await Login(data);
-      if (res) {
-        commit('SET_USER', res.user);
-        commit('SET_TOKEN', res.token);
-        return res;
+      if (res.meta.resultCode == 'SUCCESS') {
+        commit('SET_USER', res.data.userInfo);
+        commit('SET_TOKEN', res.data.token);
+        return true;
       }
+      return false;
     },
     // 前端 登出
     FedLogOut({ commit }) {
-      commit('CLEAR_USER');
+      return new Promise((resolve) => {
+        commit('CLEAR_USER');
+        location.reload();
+        resolve();
+      });
     },
   },
 };

@@ -1,5 +1,5 @@
 // 生产环境
-const prodProtocol = 'https://';
+const prodProtocol = 'http://';
 const prodHost = 'vue-demo-prod.com';
 
 const prodConfig = {

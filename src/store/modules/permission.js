@@ -48,11 +48,11 @@ const permission = {
     GetPermissions: async function({ commit }) {
       // 权限请求
       const res = await getPermission();
-      if (res.authData) {
-        const { authData } = res;
+      if (res.meta.resultCode == 'SUCCESS') {
+        const { authData } = res.data;
         commit('SET_PERMISSIONS', authData);
         // 返回权限码
-        return { resultCode: res.resultCode, authData };
+        return { resultCode: res.meta.resultCode, authData };
       } else {
         return new Error('Verification failed, please check your role.');
       }

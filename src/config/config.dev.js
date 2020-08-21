@@ -1,5 +1,5 @@
 // 开发环境配置
-const devProtocol = 'https://';
+const devProtocol = 'http://';
 const devHost = 'vue-demo-dev.com';
 
 const devConfig = {

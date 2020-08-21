@@ -33,8 +33,8 @@ export default {
   methods: {
     async handleLogin() {
       const data = this.form;
-      const res = await this.$store.dispatch('UserLogin', data);
-      if (res) {
+      const result = await this.$store.dispatch('UserLogin', data);
+      if (result) {
         this.$router.push('/');
       }
     },

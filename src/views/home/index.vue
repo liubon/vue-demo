@@ -1,5 +1,10 @@
 <template>
-  <div>Home</div>
+  <div>
+    Home
+    <div>
+      <el-button type="primary" @click="logout">退出登录</el-button>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -10,7 +15,13 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {},
+  methods: {
+    logout() {
+      this.$store.dispatch('FedLogOut').then(() => {
+        this.$router.push('/login');
+      });
+    },
+  },
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped></style>

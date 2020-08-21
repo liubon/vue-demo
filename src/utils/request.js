@@ -7,27 +7,24 @@ const service = axios.create({
   timeout: 5000, // request timeout
 });
 export const setAuthorization = (token) => {
-  console.log('token', token);
   service.defaults.headers.common['Authorization'] = token;
 };
 service.interceptors.request.use(
   (config) => {
+    /* 如果需要在请求中添加公共参数 */
     const userInfo = store.getters.userInfo;
-    const token = store.getters.token;
     // Do something before request is sent
     if (['post', 'put', 'delete'].includes(config.method)) {
       // body使用formData形式
       //   config.data = JSON.stringify(config.data);
       config.data = {
-        token,
-        userInfo,
+        ...userInfo,
         ...config.data,
       };
     }
     if (['get', 'head'].includes(config.method)) {
       config.params = {
         ...config.params,
-        token,
       };
     }
     return config;
@@ -43,11 +40,9 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     // token 过期
-    if (response.data) {
+    if (response.data.meta.resultCode == 'FedLogOut') {
       // 未登录
-      store.dispatch('FedLogOut').then(() => {
-        location.reload();
-      });
+      store.dispatch('FedLogOut');
       Message({
         message: '登陆过期请重新登陆',
         type: 'error',
