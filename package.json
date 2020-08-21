@@ -3,13 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
+    "test": "vue-cli-service serve  --mode test",
     "build": "vue-cli-service build",
+    "dev-build": "vue-cli-service build --mode development",
+    "test-build": "vue-cli-service build --mode test",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "element-ui": "^2.13.2",
+    "less-loader": "^6.2.0",
+    "qs": "^6.9.4",
+    "vue": "^2.6.11",
+    "vue-router": "^3.4.3",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
